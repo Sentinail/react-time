@@ -3,36 +3,19 @@ import Header from "./Components/Header";
 import TimeContainer from "./Components/Body";
 import Footer from "./Components/Footer";
 import "./Assets/Styles/AppStyle.css";
-import { useState, useEffect } from "react";
-import moment from "moment"
-const backgroundImg0 = require("./Assets/Images/Dark_Grid_BG.png");
+import { useState } from "react";
+const backgroundImg0 = require("./Assets/Images/titanium-texture.jpg");
 
 function App() {
   let [background, setBackground] = useState(backgroundImg0)
-  let [timeMoment, setTimeMoment] = useState({hoursMinutes: moment().format("hh:mm"), 
-                                              seconds: moment().format("ss"),
-                                              amPm: moment().format("A"),
-                                              currentDate: moment().format("dddd, MMMM DD")
-                                              });
-  
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setTimeMoment({
-        hoursMinutes: moment().format("hh:mm"),
-        seconds: moment().format("ss"),
-        amPm: moment().format("A"),
-        currentDate: moment().format("dddd, MMMM DD")
-      });
-    }, 1000);
-
-    return () => clearInterval(interval);
-  }, []);
+  let [timeFormat, setTimeFormat] = useState(["hh:mm", "A", "ss", "dddd, MMMM DD"]);
+  let [display, setDisplay] = useState(["block", "block", "block", "block"]);
 
   return (
     <div className="container" style={{backgroundImage: `url("${background}")`}}>
       <Header></Header>
-      <TimeContainer time={timeMoment}></TimeContainer>
-      <Footer changeBackground={setBackground} setMomentTime={setTimeMoment} timeMoment={timeMoment}></Footer>
+      <TimeContainer timeData={timeFormat} displayType={display}></TimeContainer>
+      <Footer changeBackground={setBackground} setFormatTime={setTimeFormat} timeFormats={timeFormat} setDisplayType={setDisplay} displayType={display}></Footer>
     </div>
   );
 }

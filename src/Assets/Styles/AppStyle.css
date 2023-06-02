@@ -17,4 +17,5 @@ body {
 .container {
     background-repeat: repeat;
     background-attachment: fixed;
+    background-size: cover;
 }

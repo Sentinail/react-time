@@ -1,7 +1,6 @@
 import React, { useState } from "react"
 import "../Assets/Styles/FooterStyle.css"
-import moment from "moment";
-const backgroundImg0 = require("../Assets/Images/Dark_Grid_BG.png");
+const backgroundImg0 = require("../Assets/Images/titanium-texture.jpg");
 const backgroundImg1 = require("../Assets/Images/blue-hair-anime-girl-Hatsune-Miku-wallpaper.jpg");
 const backgroundImg2 = require("../Assets/Images/698444.png");
 const backgroundImg3 = require("../Assets/Images/Miku_Dark.jpg");
@@ -30,17 +29,26 @@ const ChangeBackground = ({ setBackground }) => {
     );
 };
 
-const ToggleButton = ({ content, setMomentTime, timeMoment }) => {
+const ToggleButton = ({ content, setFormatTime, timeFormats, formatData, setDisplayType, displayType }) => {
     let [isToggled, setIsToggled] = useState(true);
 
+    let format = timeFormats;
+    let defaultTime = ["hh:mm", "A", "ss", "dddd, MMMM DD"];
+    let displayData = displayType;
+
+    if (!isToggled) {
+        format[formatData[1]] = formatData[0];
+        setFormatTime(format);
+        
+        displayData[formatData[1]] = formatData[2];
+        setDisplayType(displayData);
+    } else {
+        format[formatData[1]] = defaultTime[formatData[1]]
+    }
+
     const switchChanges = () => {
-        if (isToggled) {
-            setMomentTime("Bruh");
-        } else {
-          console.log("ON!!!");
-        }
-    
         setIsToggled(!isToggled);
+        displayData[formatData[1]] = "block"
       };
 
     return (
@@ -54,28 +62,29 @@ const ToggleButton = ({ content, setMomentTime, timeMoment }) => {
     )
 }
 
-const ChangeOption = ({ setTimeMoment, timeMoment }) => {
+const ChangeOption = ({ timeFormat, setTimeFormat, setDisplay, displayData }) => {
+
     return (
         <div className="change-options">
             <h3>Change Options</h3>
             <div className="toggle-buttons">
-                <ToggleButton content={"12-Hour"} setMomentTime={setTimeMoment} timeMoment={timeMoment}></ToggleButton>
-                <ToggleButton content={"AM/PM"} setMomentTime={setTimeMoment} timeMoment={timeMoment}></ToggleButton>
-                <ToggleButton content={"Seconds"} setMomentTime={setTimeMoment} timeMoment={timeMoment}></ToggleButton>
-                <ToggleButton content={"Date"} setMomentTime={setTimeMoment} timeMoment={timeMoment}></ToggleButton>
-                <ToggleButton content={"Week"} setMomentTime={setTimeMoment} timeMoment={timeMoment}></ToggleButton>
+                <ToggleButton displayType={displayData} setDisplayType={setDisplay} formatData={["HH:mm", 0, "block"]} content={"12-Hour"} setFormatTime={setTimeFormat} timeFormats={timeFormat}></ToggleButton>
+                <ToggleButton displayType={displayData} setDisplayType={setDisplay} formatData={["A", 1, "none"]} content={"AM/PM"} setFormatTime={setTimeFormat} timeFormats={timeFormat}></ToggleButton>
+                <ToggleButton displayType={displayData} setDisplayType={setDisplay} formatData={["ss", 2, "none"]} content={"Seconds"} setFormatTime={setTimeFormat} timeFormats={timeFormat}></ToggleButton>
+                <ToggleButton displayType={displayData} setDisplayType={setDisplay} formatData={["dddd, MMMM DD", 3, "none"]} content={"Date"} setFormatTime={setTimeFormat} timeFormats={timeFormat}></ToggleButton>
             </div>
         </div>
     )
 }
 
-const Footer = ({ changeBackground, setMomentTime, timeMoment }) => {
+const Footer = ({ changeBackground, setFormatTime, timeFormats, setDisplayType, displayType }) => {
+
     return (
         <>
         <div className="footer">
             <div className="settings">
                 <ChangeBackground setBackground={changeBackground}></ChangeBackground>
-                <ChangeOption setTimeMoment={setMomentTime} timeMoment={timeMoment}></ChangeOption>
+                <ChangeOption setTimeFormat={setFormatTime} timeFormat={timeFormats} setDisplay={setDisplayType} displayData={displayType}></ChangeOption>
             </div>
         </div>
         </>
