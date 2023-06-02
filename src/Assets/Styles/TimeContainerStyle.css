@@ -1,0 +1,85 @@
+.time-container {
+    width: 100%;
+    height: 100vh;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.side {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100px;
+    min-height: 100px;
+}
+
+.time {
+    height: auto;
+    min-width: 300px;
+    font-family: "Digital-7";
+    
+}
+
+.time:hover {
+    cursor: pointer;
+}
+
+.hours-minutes {
+    font-size: 150px;
+}
+
+.meridian {
+    font-size: 60px;
+    transition: all 1;
+}
+
+.seconds {
+    font-size: 60px;   
+    transition: all 1;
+}
+
+.time-stamp {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.seconds-meridiem {
+    display: flex;
+    flex-direction: column;
+}
+
+.date-container {
+    display: flex;
+    align-items: center;
+    flex-direction: row-reverse;
+}
+
+.current-date {
+    font-size: 50px;
+
+}
+
+.side {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 150px;
+    margin: 20px;
+}
+
+.side > button {
+    border: none;
+    width: 100%;
+    height: 35px;
+    font-family: "Digital-7";
+    font-size: 20px;
+    font-weight: bold;
+    background-color: rgb(15, 15, 15, 0.8);
+    color: #ffffff;
+    border-bottom: 3px solid #383838;
+    border-radius: 10px;
+}
